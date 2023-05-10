@@ -1351,13 +1351,9 @@
                     </div>
                     <div>
                         <div>自定义接口</div>
-                        <input class="inputTextClass" placeholder="https://example.com/" id="apiHostInput" value="https://api.1re.ren/"/>
+                        <input class="inputTextClass" id="apiHostInput" value="https://api.1re.ren/"/>
                     </div>
-                    <div>
-                        <div>自定义API key</div>
-                        <input class="inputTextClass" type="password" placeholder="sk-xxxxxx" id="keyInput"
-                            style="-webkit-text-security: disc;" value="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"/>
-                    </div>
+                    
                     <div>
                         <div class="justSetLine presetSelect">
                             <div>系统角色</div>
@@ -1377,7 +1373,7 @@
                     </div>
                     <div>
                         <span>角色性格</span>
-                        <input type="range" id="top_p" min="0" max="1" value="1" step="0.05" />
+                        <input type="range" id="top_p" min="0" max="1" value="0.15" step="0.05" />
                         <div class="selectDef">
                             <span>准确严谨</span>
                             <span>灵活创新</span>
@@ -1385,7 +1381,7 @@
                     </div>
                     <div>
                         <span>回答质量</span>
-                        <input type="range" id="temp" min="0" max="2" value="1" step="0.05" />
+                        <input type="range" id="temp" min="0" max="2" value="0.15" step="0.05" />
                         <div class="selectDef">
                             <span>重复刻板</span>
                             <span>胡言乱语</span>
@@ -1393,7 +1389,7 @@
                     </div>
                     <div>
                         <span>打字机速度</span>
-                        <input type="range" id="textSpeed" min="0" max="100" value="88" step="1" />
+                        <input type="range" id="textSpeed" min="0" max="100" value="60" step="1" />
                         <div class="selectDef">
                             <span>慢</span>
                             <span>快</span>
@@ -2299,7 +2295,7 @@
         const API_URL = "v1/chat/completions";
         let loading = false;
         let presetRoleData = {
-            "normal": "你是一个乐于助人的助手，尽量简明扼要地回答",
+            "normal": "你是一个乐于助人的助手，尽量符合中国国情地回答",
             "cat": "你是一个可爱的猫娘，每句话结尾都要带个'喵'",
             "document": "你是一名中国政府基层公务员，需要经常写材料，请你回答问题的时候要结合中国国情",
             "image": "当你需要发送图片的时候，请用 markdown 语言生成，不要反斜线，不要代码框，需要使用 unsplash API时，遵循一下格式， https://source.unsplash.com/960x640/? ＜英文关键词＞"
@@ -2763,17 +2759,12 @@
                 localStorage.setItem("APIHost", apiHost);
             }
             apiHostEle.dispatchEvent(new Event("change"));
-            const keyEle = document.getElementById("keyInput");
+           
             let localKey = localStorage.getItem("APIKey");
-            if (localKey) {
-                customAPIKey = localKey;
-                keyEle.value = localKey;
-            }
-            keyEle.onchange = () => {
-                customAPIKey = keyEle.value;
-                localStorage.setItem("APIKey", customAPIKey);
-            }
-            keyEle.dispatchEvent(new Event("change"));
+            
+			customAPIKey = "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";
+            localStorage.setItem("APIKey", customAPIKey);
+			
             if (systemRole === void 0) {
                 let localSystem = localStorage.getItem("system");
                 if (localSystem) {
